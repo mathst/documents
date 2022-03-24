@@ -1,16 +1,20 @@
-from flask import Flask
+from flask import Flask, request
 import src.back as bk
 import os
 
-# app.py
-from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 @app.route('/a', methods=['GET'])
-def funct():
-    """ Function which is triggered in flask app """
+def a():  
     meses = 12
     result = bk.doing("ipca.xlsx",meses)
+    return str(result)
+
+@app.route('/b', methods=['GET'])
+def b():
+    meses = request.args.get('meses')
+    file = bk.resquestBank()
+    result = bk.doing(file,meses)
     return str(result)
 
 # A welcome message to test our server
