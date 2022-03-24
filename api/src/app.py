@@ -2,33 +2,26 @@ import logging
 from flask import Flask
 import back
 
-class FlaskAppWrapper(object):
+# app.py
+from flask import Flask, request, jsonify
+app = Flask(__name__)
 
-    def __init__(self, app, **configs):
-        self.app = app
-        self.configs(**configs)
-
-    def configs(self, **configs):
-        for config, value in configs:
-            self.app.config[config.upper()] = value
-
-    def add_endpoint(self, endpoint=None, endpoint_name=None, handler=None, methods=['GET'], *args, **kwargs):
-        self.app.add_url_rule(endpoint, endpoint_name, handler, methods=methods, *args, **kwargs)
-
-    def run(self, **kwargs):
-        self.app.run(**kwargs)
-
-flask_app = Flask(__name__)
-
-app = FlaskAppWrapper(flask_app)
-
+@app.route('/', methods=['GET'])
 def funct():
     """ Function which is triggered in flask app """
     meses = 12
     result = back.doing("ipca.xlsx",meses)
     return str(result) | logging.error()
 
-app.add_endpoint('/', 'index', funct, methods=['GET'])
+# A welcome message to test our server
+@app.route('/')
+def index():
+    """ Function which is triggered in flask app """
+    meses = 12
+    result = back.doing("ipca.xlsx",meses)
+    return f'<h1>{str(result) | logging.error()}</h1>'
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    # Threaded option to enable multiple instances for multiple user access support
+    app.run(threaded=True, port=5000)
+
