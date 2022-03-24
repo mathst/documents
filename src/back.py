@@ -1,10 +1,8 @@
 from pathlib import Path
 import pandas as pd
 
-fileName = "ipca.xlsx"
-months = 12
-
 def doing (fileName,months):
+    
     xlsx = pd.ExcelFile(Path("docs",fileName))
     df = pd.read_excel(xlsx)
     df = pd.DataFrame(df)

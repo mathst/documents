@@ -1,5 +1,5 @@
 from flask import Flask
-import src.back as back
+import back 
 
 # app.py
 from flask import Flask, request, jsonify

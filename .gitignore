@@ -127,6 +127,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-  git config --global user.email "mathkol@sempreceub.com"
-  git config --global user.name "mathst"
