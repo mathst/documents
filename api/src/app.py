@@ -1,3 +1,4 @@
+import logging
 from flask import Flask
 import back
 
@@ -25,8 +26,9 @@ def funct():
     """ Function which is triggered in flask app """
     meses = 12
     result = back.doing("ipca.xlsx",meses)
-    return str(result)
+    return str(result) | logging.error()
 
 app.add_endpoint('/', 'index', funct, methods=['GET'])
+
 if __name__ == "__main__":
     app.run(debug=True)
