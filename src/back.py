@@ -5,7 +5,7 @@ fileName = "ipca.xlsx"
 months = 12
 
 def doing (fileName,months):
-    xlsx = pd.ExcelFile(Path(Path.home(),"documents","docs",fileName))
+    xlsx = pd.ExcelFile(Path("docs",fileName))
     df = pd.read_excel(xlsx)
     df = pd.DataFrame(df)
     #formata a data para o padrão de dataframe
